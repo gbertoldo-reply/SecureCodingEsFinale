@@ -17,6 +17,9 @@ import org.apache.wink.json4j.JSONObject;
 import com.notsecurebank.util.DBUtil;
 import com.notsecurebank.util.ServletUtil;
 
+import com.notsecurebank.model.User;
+import com.notsecurebank.model.User.Role;
+
 @Path("/admin")
 public class AdminAPI extends NotSecureBankAPI {
 
@@ -77,6 +80,13 @@ public class AdminAPI extends NotSecureBankAPI {
         LOG.info("addUser");
 
         JSONObject bodyJson = new JSONObject();
+
+        User user = ServletUtil.getUser(request);
+
+        if(!user.getRole().equals(Role.Admin)){
+            String response = "{Utente non amministratore}"
+            return Response.status(400).entity(response).build();
+        }
 
         // Checking if user is logged in
 
