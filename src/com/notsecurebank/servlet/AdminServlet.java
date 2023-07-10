@@ -26,7 +26,8 @@ public class AdminServlet extends HttpServlet {
         if (request.getRequestURL().toString().endsWith("addAccount")) {
             LOG.info("addAccount");
 
-            String username = request.getParameter("username");
+            
+            String username = ServletUtil.getUser(request).getUsername();
             String acctType = request.getParameter("accttypes");
             if (username == null || acctType == null || username.trim().length() == 0 || acctType.trim().length() == 0) {
                 LOG.error("Inserted data null or empty for addAccount operation.");
