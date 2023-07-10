@@ -24,6 +24,9 @@ public class OperationsUtil {
 
         User user = ServletUtil.getUser(request);
         String userName = user.getUsername();
+        boolean isUserAccountDebit = false;
+        boolean isUserAccountCredit = false;
+        
 
         try {
             Long accountId = -1L;
@@ -82,6 +85,26 @@ public class OperationsUtil {
         } else if (amount < 0) {
             message = "Transfer amount is invalid";
         }
+
+        for(Account userAccount : ServletUtil.getUser(request).getAccounts()){
+            if(userAccount.getAccountId().equals(debitActId)){
+                isUserAccountDebit = true;
+            }
+        }
+
+
+        for(Account userAccount : ServletUtil.getUser(request).getAccounts()){
+            if(userAccount.getAccountId().equals(creditActId)){
+                isUserAccountCredit = true;
+            }
+        }
+
+        if(!isUserAccountDebit || !isUserAccountCredit){
+            message = "Selected accounts are invalid";
+        }
+
+
+                   
 
         // if transfer amount is zero then there is nothing to do
         if (message == null && amount > 0) {
