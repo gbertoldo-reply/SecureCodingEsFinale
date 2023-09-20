@@ -509,10 +509,10 @@ public class DBUtil {
         }
     }
 
-    public static String addSubscription(String email) throws SQLException {
+    public static boolean addSubscription(String email) throws SQLException {
         LOG.debug("addSubscription('" + email + "')");
 
-        String registeredUser = null;
+        boolean registeredUser = false;
 
         try {
 
@@ -544,9 +544,10 @@ public class DBUtil {
                 String readUser = resultSet.getString("USER_ID");
                 if (readUser != null) {
                     LOG.debug("An already registered user exists.");
-                    registeredUser = readUser;
+                    registeredUser = true;
                 }
             }
+
 
         } catch (SQLException e) {
             LOG.error(e.toString());
@@ -554,6 +555,7 @@ public class DBUtil {
         }
 
         return registeredUser;
+
     }
 
     public static boolean isSpecialPrizeActive() {
