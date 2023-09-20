@@ -35,11 +35,7 @@
 		      <input type="submit" id="btnGetAccount" value="   GO   ">
 		    </td>
 		  </tr>
-		  <% if (ServletUtil.isPreApprovedForGoldVisa(request) && !user.hasGoldVisaDelivery()) { %>
-		  <tr>
-		    <td colspan="2"><span id="_ctl0__ctl0_Content_Main_promo"><table width=590 border=0><tr><td><h2>Congratulations! </h2></td></tr><tr><td>You have been pre-approved for a Gold Visa with a credit limit of $10000!</td></tr><tr><td>Click <a href='apply.jsp'>Here</a> to apply.</td></tr></table></span></td>
-		  </tr>
-		  <% } %>
+		
 		</table>
 		</form>
 		
